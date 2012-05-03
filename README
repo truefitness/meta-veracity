@@ -1,0 +1,10 @@
+This is the meta-data layer for the Veracity project Linux system
+containing the Linux BSP and file system images.
+
+It is to be used along with the yocto project:
+
+
+> git clone git://git.yoctoproject.org/poky.git
+> cd poky
+> git clone git@github.com:truefitness/meta-veracity.git
+
