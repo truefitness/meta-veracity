@@ -4,7 +4,7 @@
 DESCRIPTION = "Veracity Touch console image." 
 
 IMAGE_FEATURES += "apps-console-core package-management \
-x11-base \
+x11-base apps-x11-core \
 qt4-x11-free \
 "
 # These aren't features, which is why they won't install.  theyre recipes!
@@ -13,12 +13,12 @@ qt4-x11-free \
 #"
 
 
-RDEPENDS_${PN} = " truetouch"
+RDEPENDS_${PN} = " truetouch mesa-dri"
 
 #${X11_IMAGE_FEATURES} \
 #qt4-pkgs \
 # x11-base qt4-pkgs nfs nfsclient"
-IMAGE_INSTALL = " ${CORE_IMAGE_BASE_INSTALL} truetouch fotowall"
+IMAGE_INSTALL = " ${CORE_IMAGE_BASE_INSTALL} truetouch fotowall mesa-dri"
 #IMAGE_INSTALL = "task-core-boot ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL}"
 
 IMAGE_LINGUAS = " "
