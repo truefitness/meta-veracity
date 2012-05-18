@@ -3,32 +3,22 @@
 #
 DESCRIPTION = "Veracity Touch console image." 
 
-IMAGE_FEATURES += "apps-console-core package-management \
-x11-base apps-x11-core \
+IMAGE_FEATURES += "apps-console-core ${X11_IMAGE_FEATURES} x11-mini \
 qt4-x11-free \
+ssh-server-dropbear \
 "
-# These aren't features, which is why they won't install.  theyre recipes!
-#fotowall \
-#truetouch-session truetouch \
-#"
+LICENSE = "MIT"
 
+RDEPENDS_${PN} += " truetouch mesa-dri"
 
-RDEPENDS_${PN} = " truetouch mesa-dri"
+IMAGE_INSTALL += " ${CORE_IMAGE_BASE_INSTALL} truetouch fotowall mesa-dri"
 
-#${X11_IMAGE_FEATURES} \
-#qt4-pkgs \
-# x11-base qt4-pkgs nfs nfsclient"
-IMAGE_INSTALL = " ${CORE_IMAGE_BASE_INSTALL} truetouch fotowall mesa-dri"
-#IMAGE_INSTALL = "task-core-boot ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL}"
-
-IMAGE_LINGUAS = " "
-
-#LICENSE = "MIT"
+#IMAGE_LINGUAS = " "
 
 
 inherit core-image
 
-IMAGE_ROOTFS_SIZE = "8192"
+#IMAGE_ROOTFS_SIZE = "8192"
 
 # remove not needed ipkg informations
 #ROOTFS_POSTPROCESS_COMMAND += "remove_packaging_data_files ; "
