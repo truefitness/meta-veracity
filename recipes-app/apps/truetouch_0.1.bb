@@ -6,7 +6,7 @@ SECTION = "x11/apps"
 
 PR = "r0"
 
-DEPENDS = "qt4-x11-free qt-mobility-x11"
+DEPENDS = "qt4-x11-free" 
 RRECOMMENDS_${PN} += "qt4-plugin-imageformat-gif qt4-plugin-imageformat-jpeg qt4-plugin-imageformat-tiff"
 
 # github repository for console application
