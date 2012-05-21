@@ -3,7 +3,7 @@
 #
 DESCRIPTION = "Veracity Touch console image." 
 
-IMAGE_FEATURES += "apps-console-core ${X11_IMAGE_FEATURES} x11-mini \
+IMAGE_FEATURES += "apps-console-core ${X11_IMAGE_FEATURES} package-manager x11-mini \
 qt4-x11-free \
 ssh-server-dropbear \
 "
