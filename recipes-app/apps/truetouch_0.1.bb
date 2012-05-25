@@ -30,14 +30,14 @@ inherit qmake2 pkgconfig
 APPDIR= "/usr/local/bin/truetouch"
 FILES_${PN} = "\
                 ${APPDIR}/* \
-		${sysconfdir}/X11/Xsession.d/99app.sh \
+		${sysconfdir}/X11/Xsession.d/89app.sh \
                 "
 
 do_install() {
 	oe_runmake INSTALL_ROOT=${D} install
 	install -d ${D}${sysconfdir}/X11/Xsession.d
 	install -m 644 ${S}/*.qm ${D}${APPDIR}
-	install -m 0755 ${WORKDIR}/truetouch-session ${D}${sysconfdir}/X11/Xsession.d/99app.sh
+	install -m 0755 ${WORKDIR}/truetouch-session ${D}${sysconfdir}/X11/Xsession.d/89app.sh
 }
 
-CONFFILES_${PN} = "${sysconfdir}/X11/Xsession.d/99app.sh"
+CONFFILES_${PN} = "${sysconfdir}/X11/Xsession.d/89app.sh"
