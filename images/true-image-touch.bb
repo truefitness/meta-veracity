@@ -9,9 +9,9 @@ ssh-server-dropbear \
 "
 LICENSE = "MIT"
 
-RDEPENDS_${PN} += " truetouch mesa-dri"
+RDEPENDS_${PN} += " truetouch mesa-dri xf86-video-intel xf86-video-fbdev"
 
-IMAGE_INSTALL += " ${CORE_IMAGE_BASE_INSTALL} truetouch fotowall mesa-dri"
+IMAGE_INSTALL += " ${CORE_IMAGE_BASE_INSTALL} truetouch mesa-dri tslib xtscal xvinfo wireless-tools wpa-supplicant xf86-video-intel xf86-video-fbdev"
 
 #IMAGE_LINGUAS = " "
 
