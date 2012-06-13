@@ -128,22 +128,32 @@ case $label in
 	fi
 	;;
     boot)
-	    mkdir -p $ROOT_MOUNT
-	    mknod /dev/loop0 b 7 0 2>/dev/null
+        mkdir -p $ROOT_MOUNT
+        mknod /dev/loop0 b 7 0 2>/dev/null
 
+	# get the first entry in the sums list
+	ROOTFS=`cat /boot/rootfs.md5 | head -1 | cut -f3 -d' '`
+	# test the md5sum
+        cat /boot/rootfs.md5 | head -1 | md5sum -c -
+        if [ $? -gt 0 ] ; then
+            echo Checksum of $ROOTFS failed.
+        else
+            echo Checksum of $ROOTFS pass.
+            ROOT_IMAGE=$ROOTFS
+        fi
         echo ROOT_IMAGE is $ROOT_IMAGE
         echo ROOT_MOUNT is $ROOT_MOUNT
 
         # the /media mount points do not seem to be available fast enough, so mount manually
-	    mknod /dev/sda1 b 8 1 2>/dev/null
+        mknod /dev/sda1 b 8 1 2>/dev/null
         mkdir -p /boot
         mount /dev/sda1 /boot
         
-	    if ! $MOUNT -o ro,loop,noatime,nodiratime /boot/$ROOT_IMAGE $ROOT_MOUNT ; then
-	        fatal "Could not mount rootfs image"
-	    else
-	        boot_live_root
-	    fi
+        if ! $MOUNT -o ro,loop,noatime,nodiratime /boot/$ROOT_IMAGE $ROOT_MOUNT ; then
+            fatal "Could not mount rootfs image"
+        else
+            boot_live_root
+        fi
  	;;       
     shell)
         exec /bin/sh

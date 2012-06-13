@@ -126,30 +126,30 @@ echo "Config partition size: $config_size MB ($configfs)"
 echo "Data partition size: $data_size MB ($datafs)"
 echo "*****************"
 
-echo "Proceed? (y/n)"
-read answer
-if [ "$answer" != "y" ] ; then
-  exit
-fi
+#echo "Proceed? (y/n)"
+#read answer
+#if [ "$answer" != "y" ] ; then
+#  exit
+#fi
 	  
 if [ false ] ; then
 echo "Deleting partition table on /dev/${device} ..."
 dd if=/dev/zero of=/dev/${device} bs=512 count=2
 
 echo "Creating new partition table on /dev/${device} ..."
-parted /dev/${device} mklabel msdos
+parted -s /dev/${device} mklabel msdos
 
 echo "Creating boot partition on $bootfs"
-parted /dev/${device} mkpart primary 1 $boot_size
+parted -s /dev/${device} mkpart primary 1 $boot_size
 
 echo "Creating swap partition on $swap"
-parted /dev/${device} mkpart primary $swap_start $swap_end
+parted -s /dev/${device} mkpart primary $swap_start $swap_end
 
 echo "Creating config partition on $configfs"
-parted /dev/${device} mkpart primary $config_start $config_end
+parted -s /dev/${device} mkpart primary $config_start $config_end
 
 echo "Creating data partition on $datafs"
-parted /dev/${device} mkpart primary $data_start $data_end
+parted -s -a optimal /dev/${device} mkpart primary $data_start $data_end
 
 parted /dev/${device} print
 
@@ -177,14 +177,20 @@ kernel_srcfile=/media/$1/vmlinuz
 initrd_srcfile=/media/$1/initrd
 
 mount $bootfs /boot
-#mkdir -p /boot/boot
 
 echo "Copying rootfs image file..."
-cp -a $rootimg_srcfile /boot
+cp -a $rootimg_srcfile /boot/rootfs.img
 echo "Copying kernel image file..."
 cp -a $kernel_srcfile /boot
 echo "Copying initrd image file..."
 cp -a $initrd_srcfile /boot
+
+echo "creating backup rootfs"
+cp $rootimage_srcfile /boot/rootfs.bak
+
+echo "calculating sums..."
+md5sum /boot/rootfs.img >> /boot/rootfs.md5
+md5sum /boot/rootfs.bak >> /boot/rootfs.md5
 
 # mount the new root image file
 mount -o rw,loop,noatime,nodiratime /boot/$2 /root
@@ -233,7 +239,6 @@ else
     echo "timeout 30" >> /boot/grub/menu.lst
     echo "title Live Boot/Install-Image" >> /boot/grub/menu.lst
     echo "root  (hd0,0)" >> /boot/grub/menu.lst
-    #echo "kernel /boot/vmlinuz root=$rootfs rw $3 $4 quiet" >> /boot/grub/menu.lst
     echo "kernel /boot/vmlinuz root=/initrd rw $3 $4 quiet" >> /boot/grub/menu.lst
 fi
 
