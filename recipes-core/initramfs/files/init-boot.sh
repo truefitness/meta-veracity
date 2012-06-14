@@ -62,7 +62,7 @@ boot_live_root() {
     fi
 
     cd $ROOT_MOUNT
-    exec switch_root -c /dev/console $ROOT_MOUNT /sbin/init
+    exec switch_root -c $CONSOLE $ROOT_MOUNT /sbin/init
     mount /dev/sda1 /boot
 }
 
@@ -83,13 +83,19 @@ find_removable() {
     while true
     do
       for i in `ls /media 2>/dev/null`; do
-          if [ -f /media/$i/$ROOT_IMAGE ] ; then
+          #get the stem name of drive (e.g. sdb instead of sdb4)
+          drive=`echo $i | cut -c1-3`
+          if [ -e /sys/block/${drive}/removable ]; then
+              if [ "$(cat /sys/block/${drive}/removable)" = "1" ]; then
+                  if [ -f /media/$i/$ROOT_IMAGE ] ; then
 		    found="yes"
 		    break
-	      elif [ -f /media/$i/isolinux/$ROOT_IMAGE ]; then
-		    found="yes"
-		    ISOLINUX="isolinux"
-		    break	
+	          elif [ -f /media/$i/isolinux/$ROOT_IMAGE ]; then
+                      found="yes"
+                      ISOLINUX="isolinux"
+                      break	
+                  fi
+              fi
           fi
       done
       if [ "$found" = "yes" ]; then
@@ -161,17 +167,16 @@ case $label in
     ;;
     install)
 
-	    find_removable
+        find_removable
 
         echo Install from $removable_dev
         echo $ROOT_IMAGE
-	    if [ -f /media/$removable_dev/$ISOLINUX/$ROOT_IMAGE ] ; then
-	        ./install.sh $removable_dev/$ISOLINUX $ROOT_IMAGE $video_mode $vga_mode
-	    else
-	        fatal "Could not find install script"
-	    fi
-
-	    # If we're getting here, we failed...
-	    fatal "Installation image failed"
-	;;
+        if [ -f /media/$removable_dev/$ISOLINUX/$ROOT_IMAGE ] ; then
+            ./install.sh $removable_dev/$ISOLINUX $ROOT_IMAGE $video_mode $vga_mode
+        else
+            fatal "Could not find install script"
+        fi
+        # If we're getting here, we failed...
+        fatal "Installation image failed"
+    ;;
 esac

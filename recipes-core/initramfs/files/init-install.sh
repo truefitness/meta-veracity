@@ -7,16 +7,6 @@
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
-# We need room in the boot partition for 2 revisions of the root file system and kernels
-boot_size=640
-
-# Size of configuration data partition
-config_size=8
-
-# % of disk for the swap partition
-swap_ratio=5
-swap_size=128
-
 found="no"
 
 echo "Searching for a hard drive..."
@@ -83,9 +73,23 @@ fi
 mkdir -p /tmp
 cat /proc/mounts > /etc/mtab
 
+rootimg_srcfile=/media/$1/$2
+kernel_srcfile=/media/$1/vmlinuz
+initrd_srcfile=/media/$1/initrd
+
 disk_size=$(parted /dev/${device} unit mb print | grep Disk | cut -d" " -f 3 | sed -e "s/MB//")
 
-#swap_size=$((disk_size*5/100))
+# We need room in the boot partition for 2 revisions of the root file system and kernels
+boot_size=$((15+2*`ls -l rootfs.img | cut -f5 -d' '` /1024/1024))
+#boot_size=640
+
+# Size of configuration data partition
+config_size=8
+
+# % of disk for the swap partition
+swap_ratio=5
+swap_size=128
+
 # data partition size is what is left
 data_size=$((disk_size-boot_size-config_size-swap_size))
 
@@ -172,9 +176,6 @@ mkdir -p /datamnt
 mkdir -p /configmnt
 mkdir -p /boot
 
-rootimg_srcfile=/media/$1/$2
-kernel_srcfile=/media/$1/vmlinuz
-initrd_srcfile=/media/$1/initrd
 
 mount $bootfs /boot
 
