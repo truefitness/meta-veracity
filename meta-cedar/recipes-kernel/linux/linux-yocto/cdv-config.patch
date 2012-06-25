@@ -1,0 +1,35 @@
+From c1c8acfe795268cab47e8aeb31470021fa5642c2 Mon Sep 17 00:00:00 2001
+From: Ralph <rwalden@ieee.org>
+Date: Sat, 23 Jun 2012 21:20:11 -0500
+Subject: [PATCH] Add CONFIG_DRM_INTEL_CDV config option 	modified:  
+ drivers/staging/Kconfig 	modified:  
+ drivers/staging/Makefile
+
+---
+ drivers/staging/Kconfig  |    2 ++
+ drivers/staging/Makefile |    1 +
+ 2 files changed, 3 insertions(+)
+
+diff --git a/drivers/staging/Kconfig b/drivers/staging/Kconfig
+index 25cdff3..9fc63e8 100644
+--- a/drivers/staging/Kconfig
++++ b/drivers/staging/Kconfig
+@@ -132,4 +132,6 @@ source "drivers/staging/nvec/Kconfig"
+ 
+ source "drivers/staging/media/Kconfig"
+ 
++source "drivers/staging/cdv/Kconfig"
++
+ endif # STAGING
+diff --git a/drivers/staging/Makefile b/drivers/staging/Makefile
+index a25f3f2..e0b2637 100644
+--- a/drivers/staging/Makefile
++++ b/drivers/staging/Makefile
+@@ -57,3 +57,4 @@ obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_I2C_RMI4)	+= ste_rmi4/
+ obj-$(CONFIG_DRM_PSB)		+= gma500/
+ obj-$(CONFIG_INTEL_MEI)		+= mei/
+ obj-$(CONFIG_MFD_NVEC)		+= nvec/
++obj-$(CONFIG_DRM_INTEL_DEV)	+= cdv/
+-- 
+1.7.9.5
+
