@@ -7,7 +7,7 @@ SECTION = "x11/apps"
 PR = "r3"
 
 DEPENDS = "qt4-x11-free qt-mobility-x11 libqrencode qt-gstreamer"
-RDEPENDS = "gstreamer gst-plugins-base gst-plugins-good gst-ffmpeg sqlite3"
+RDEPENDS = "gstreamer gst-plugins-good gst-ffmpeg sqlite3"
 RRECOMMENDS_${PN} += "qt4-plugin-imageformat-gif qt4-plugin-imageformat-jpeg qt4-plugin-imageformat-tiff"
 
 # uncomment the followint 2 lines instead of first git SRC_URI to use local git repository for application development

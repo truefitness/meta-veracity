@@ -1,10 +1,10 @@
 DESCRIPTION  = "GStreamer bindings for Qt"
 
-LICENSE  = "LGPL"
+LICENSE  = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
-DEPENDS  = "boost qt4-x11-free"
-PR = "r0"
+DEPENDS  = "gstreamer gst-plugins-base boost boost-native qt4-x11-free"
+PR = "r1"
 SRCREV = "33d5a410fc7e7997a9c4ebf76ae6500fb4f6b321"
 
 inherit cmake
@@ -31,6 +31,7 @@ Prefix =
 Binaries = ${STAGING_BINDIR_NATIVE}
 Headers = ${STAGING_INCDIR}/qt4
 Plugins = ${STAGING_LIBDIR}/qt4/plugins/
+Libraries = ${STAGING_LIBDIR}
 Mkspecs = ${STAGING_DATADIR}/qt4/mkspecs/
 EOF
 }
@@ -38,3 +39,4 @@ EOF
 addtask generate_qt_config_file after do_patch before do_configure
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+

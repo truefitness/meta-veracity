@@ -1,0 +1,12 @@
+--- touch/Touch.pro
++++ touch/Touch.pro
+@@ -4,7 +4,7 @@
+ touch_qml.source = qml/
+ touch_qml.target = .
+ 
+-DEPLOYMENTFOLDERS = touch_qml touch_programs
++#DEPLOYMENTFOLDERS = touch_qml touch_programs
+ INCLUDEPATH += control/
+ 
+ # files to install when we do "make install"
+
