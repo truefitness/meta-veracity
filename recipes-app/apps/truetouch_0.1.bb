@@ -4,18 +4,20 @@ HOMEPAGE = "http://www.truefitness.com/"
 LICENSE = "CLOSED"
 SECTION = "x11/apps"
 
-PR = "r1"
+PR = "r3"
 
-DEPENDS = "qt4-x11-free qt-mobility-x11"
+DEPENDS = "qt4-x11-free qt-mobility-x11 libqrencode qt-gstreamer"
+RDEPENDS = "gstreamer gst-plugins-base gst-plugins-good gst-ffmpeg sqlite3"
 RRECOMMENDS_${PN} += "qt4-plugin-imageformat-gif qt4-plugin-imageformat-jpeg qt4-plugin-imageformat-tiff"
 
 # uncomment the followint 2 lines instead of first git SRC_URI to use local git repository for application development
-#TRUETOUCH_SRC_LOCAL ?= "/home/rwalden/work/Veracity"
-#SRC_URI = "git://${TRUETOUCH_SRC_LOCAL};protocol=file;branch=pokydev"
+#TRUETOUCH_SRC_LOCAL ?= "/home/likewise-open/TRUEDOM/rwalden/projects/true/Veracity"
+#SRC_URI = "git://${TRUETOUCH_SRC_LOCAL};protocol=file"
 
 # github repository for console application
 SRC_URI = "git://git@github.com/truefitness/Veracity.git;protocol=ssh"
 SRC_URI += " file://truetouch-session"
+SRC_URI += " file://nodeploy.patch"
 
 # use the HEAD of the selected branch instead of a specific commit
 SRCREV = "${AUTOREV}"
