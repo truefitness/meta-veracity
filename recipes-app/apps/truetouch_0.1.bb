@@ -27,10 +27,17 @@ S = "${WORKDIR}/git/touch"
 inherit qmake2 pkgconfig
 
 APPDIR= "/usr/local/bin/truetouch"
-FILES_${PN} = "\
+
+# place debugging and translation files in separate packages
+PACKAGES = "${PN}-dbg ${PN}-locale ${PN}"
+
+FILES_${PN}-locale += "${APPDIR}/*.qm"
+FILES_${PN}-dbg += "${APPDIR}/.debug"
+FILES_${PN} += "\
                 ${APPDIR}/* \
 		${sysconfdir}/X11/Xsession.d/89app.sh \
                 "
+
 
 do_install() {
 	oe_runmake INSTALL_ROOT=${D} install

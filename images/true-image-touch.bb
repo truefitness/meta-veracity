@@ -10,11 +10,13 @@ ssh-server-dropbear \
 "
 LICENSE = "MIT"
 
+TRUETOUCH_QT_PACKAGES = "qt4-plugin-sqldriver-sqlite qt4-plugin-graphicssystems-glgraphicsssytem"
 RDEPENDS_${PN} += " truetouch mesa-dri "
 
-IMAGE_INSTALL += " ${CORE_IMAGE_BASE_INSTALL} ${ROOTFS_PKGMANAGE_BOOTSTRAP} truetouch"
+IMAGE_INSTALL += " ${CORE_IMAGE_BASE_INSTALL} ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${TRUETOUCH_QT_PACKAGES} \
+                    truetouch xvinfo sqlite3 mesa-demos linux-firmware"
 
-#mesa-dri tslib xtscal xvinfo wireless-tools wpa-supplicant"
+#need these? xvinfo wireless-tools wpa-supplicant"
 
 IMAGE_LINGUAS = " "
 
@@ -28,9 +30,9 @@ INITRD_IMAGE = "true-image-initramfs"
 inherit core-image
 
 # add a boot menu item to drop to shell after mounting initrd (see initrd init script in true-image-initramfs)
-SYSLINUX_LABELS_append = " live shell"
+SYSLINUX_LABELS_prepend = "live shell "
 
-#IMAGE_ROOTFS_SIZE = "8192"
+IMAGE_ROOTFS_EXTRA_SPACE = "8192"
 
 # remove not needed ipkg informations
 #ROOTFS_POSTPROCESS_COMMAND += "remove_packaging_data_files ; "

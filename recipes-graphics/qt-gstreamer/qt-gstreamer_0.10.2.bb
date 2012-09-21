@@ -13,12 +13,14 @@ SRC_URI = "git://anongit.freedesktop.org/gstreamer/qt-gstreamer;protocol=git"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE = " -DQTGSTREAMER_EXAMPLES=OFF -DQTGSTREAMER_TESTS=OFF -DQTGSTREAMER_CODEGEN=OFF"
+EXTRA_OECMAKE = " -DLIB_INSTALL_DIR:PATH=${libdir} -DQT_IMPORTS_DIR:PATH=${libdir}/qt4/imports -DQTGSTREAMER_EXAMPLES=OFF -DQTGSTREAMER_TESTS=OFF -DQTGSTREAMER_CODEGEN=OFF -DUSE_GST_PLUGIN_DIR=OFF"
 
-FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
+FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug ${libdir}/qt4/imports/QtGStreamer/.debug"
 
-FILES_${PN} += "${libdir}/gstreamer-0.10 \
-                ${libdir}/QtGStreamer"
+FILES_${PN} += "${libdir}/gstreamer-0.10/* \
+                ${libdir}/QtGStreamer/* \
+                ${libdir}/qt4/imports/QtGStreamer \
+"
 
 
 # Generate a qt.conf file to point to the correct mkspec for qmake.  Need target mkspec
