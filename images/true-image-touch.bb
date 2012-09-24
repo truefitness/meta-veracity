@@ -10,11 +10,20 @@ ssh-server-dropbear \
 "
 LICENSE = "MIT"
 
-TRUETOUCH_QT_PACKAGES = "qt4-plugin-sqldriver-sqlite qt4-plugin-graphicssystems-glgraphicsssytem"
+PREFERRED_VERSION_qt4-x11-free = "4.8.0"
+PREFERRED_VERSION_qt4-native = "4.8.0"
+
+VERACITY_QT_PACKAGES = "sqlite3 qt4-plugin-sqldriver-sqlite qt4-plugin-graphicssystems-glgraphicssystem"
+VERACITY_DEV_PACKAGES = "xvinfo mesa-demos"
+VERACITY_TOUCH_PACKAGES = "truetouch truetouch-locale"
+VERACITY_VIDEO_PACKAGES = "gst-plugins-good-video4linux2 gst-plugins-base-xvimagesink gst-plugins-good-deinterlace \
+	gst-plugins-base-ffmpegcolorspace gstreamer-vaapi "
+
 RDEPENDS_${PN} += " truetouch mesa-dri "
 
-IMAGE_INSTALL += " ${CORE_IMAGE_BASE_INSTALL} ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${TRUETOUCH_QT_PACKAGES} \
-                    truetouch xvinfo sqlite3 mesa-demos linux-firmware"
+IMAGE_INSTALL += " ${CORE_IMAGE_BASE_INSTALL} ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${VERACITY_QT_PACKAGES} \
+		   ${VERACITY_TOUCH_PACKAGES} ${VERACITY_DEV_PACKAGES} ${VERACITY_VIDEO_PACKAGES} \
+                    linux-firmware"
 
 #need these? xvinfo wireless-tools wpa-supplicant"
 
