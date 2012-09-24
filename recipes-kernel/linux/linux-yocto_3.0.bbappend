@@ -4,4 +4,5 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI_cedartrail-nopvr += "\
 file://wlan.cfg \
 file://vid.cfg \
+file://multitouch.cfg \
 "
