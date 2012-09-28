@@ -16,7 +16,7 @@ PREFERRED_VERSION_qt4-native = "4.8.0"
 VERACITY_QT_PACKAGES = "sqlite3 qt4-plugin-sqldriver-sqlite qt4-plugin-graphicssystems-glgraphicssystem"
 VERACITY_DEV_PACKAGES = "xvinfo mesa-demos"
 VERACITY_TOUCH_PACKAGES = "truetouch truetouch-locale"
-VERACITY_VIDEO_PACKAGES = "gst-plugins-good-video4linux2 gst-plugins-base-xvimagesink gst-plugins-good-deinterlace \
+VERACITY_VIDEO_PACKAGES = "gst-meta-base gst-plugins-base gst-plugins-good gst-plugins-good-video4linux2 gst-plugins-base-xvimagesink gst-plugins-good-deinterlace \
 	gst-plugins-base-ffmpegcolorspace gstreamer-vaapi "
 
 RDEPENDS_${PN} += " truetouch mesa-dri "

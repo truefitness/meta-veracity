@@ -3,6 +3,7 @@
 # Very simple launcher for the True touch application
 #
 
+export QT_GRAPHICSSYSTEM=raster
 
 cd /usr/local/bin/truetouch
 exec /usr/local/bin/truetouch/Touch
