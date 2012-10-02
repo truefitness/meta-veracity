@@ -3,6 +3,9 @@ LICENSE = "GPLv2"
 
 PR = "r1"
 
+LICENSE  = "LGPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
+
 SRC_URI = "http://wirbel.htpc-forum.de/w_scan/w_scan-${PV}.tar.bz2"
 S = "${WORKDIR}/w_scan-${PV}"
 
