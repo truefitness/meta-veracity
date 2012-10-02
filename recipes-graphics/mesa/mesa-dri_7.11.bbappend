@@ -8,5 +8,5 @@ DEPENDS += "libxt "
 
 EXTRA_OECONF = "--with-driver=dri --disable-gallium --without-gallium-drivers --with-dri-drivers=${DRIDRIVERS}"
 
-EXTRA_OECONF += "--enable-gles1 --enable-gles2 --with-egl-platforms='drm x11' --enable-shared-glapi --enable-glx-tls"
+EXTRA_OECONF += "--enable-gles1 --enable-gles2 --with-egl-platforms='drm' --enable-xcb --enable-gbm --enable-shared-glapi --enable-glx-tls"
 
