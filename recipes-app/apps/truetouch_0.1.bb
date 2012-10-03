@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.truefitness.com/"
 LICENSE = "CLOSED"
 SECTION = "x11/apps"
 
-PR = "r3"
+PR = "r4"
 
 DEPENDS = "qt4-x11-free qt-mobility-x11 libqrencode qt-gstreamer"
 RDEPENDS = "gstreamer gst-plugins-good gst-ffmpeg sqlite3"
@@ -27,8 +27,13 @@ S = "${WORKDIR}/git/touch"
 inherit qmake2 pkgconfig
 
 APPDIR= "/usr/local/bin/truetouch"
-FILES_${PN} = "\
-                ${APPDIR}/* \
+
+# place debugging and translation files in separate packages
+PACKAGES = "${PN}-dbg ${PN}-locale ${PN}"
+
+FILES_${PN}-locale += "${APPDIR}/*.qm"
+FILES_${PN}-dbg += "${APPDIR}/.debug"
+FILES_${PN} = "${APPDIR}/* \
 		${sysconfdir}/X11/Xsession.d/89app.sh \
                 "
 
