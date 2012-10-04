@@ -128,8 +128,10 @@ EXTRA_OECONF = " \
 	--enable-select \
 	--enable-libass \
 	\
-	--extra-libs=' -lXext -lX11 -lBasicUsageEnvironment -lUsageEnvironment -lgroupsock -lliveMedia -lstdc++ -lvorbis ' \
+	--extra-libs=' -lXext -lX11 -lstdc++ ' \
 "
+
+#--extra-libs=' -lXext -lX11 -lBasicUsageEnvironment -lUsageEnvironment -lgroupsock -lliveMedia -lstdc++ -lvorbis ' \
 
 EXTRA_OECONF_append_armv6 = " --enable-armv6"
 EXTRA_OECONF_append_armv7a = " --enable-armv6 --enable-neon"
