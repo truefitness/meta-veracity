@@ -9,7 +9,7 @@ touchscreen wifi \
 ssh-server-dropbear \
 "
 LICENSE = "CLOSED"
-PR = "r2"
+PR = "r4"
 
 PREFERRED_VERSION_qt4-x11-free = "4.8.0"
 PREFERRED_VERSION_qt4-native = "4.8.0"
@@ -20,9 +20,7 @@ VERACITY_PLATFORM_PACKAGES = "linux-firmware wireless-tools wpa-supplicant"
 VERACITY_GRAPHICS_PACKAGES = "xinput-calibrator mesa-dri openbox openbox-theme-clearlooks"
 VERACITY_VIDEO_PACKAGES = "gst-meta-base gst-plugins-base gst-plugins-good gst-plugins-good-video4linux2 gst-plugins-base-xvimagesink gst-plugins-good-deinterlace \
 	gst-plugins-base-ffmpegcolorspace gstreamer-vaapi "
-VERACITY_APP_PACKAGES = "truetouch truetouch-locale mplayer2"
-
-#RDEPENDS_${PN} += " truetouch mesa-dri "
+VERACITY_APP_PACKAGES = "truetouch truetouch-locale mplayer2 wscan"
 
 IMAGE_INSTALL += " ${CORE_IMAGE_BASE_INSTALL} \
                     ${ROOTFS_PKGMANAGE_BOOTSTRAP} \ 
@@ -45,7 +43,7 @@ INITRD_IMAGE = "true-image-initramfs"
 inherit core-image
 
 # add a boot menu item to drop to shell after mounting initrd (see initrd init script in true-image-initramfs)
-SYSLINUX_LABELS_append = " live shell"
+SYSLINUX_LABELS_prepend = " live shell"
 
 IMAGE_ROOTFS_EXTRA_SPACE = "8192"
 
